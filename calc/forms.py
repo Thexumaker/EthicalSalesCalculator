@@ -3,7 +3,7 @@ from calc.models import Order
 
 class OrderForm(forms.ModelForm):
     numLocations = forms.IntegerField()
-    nonWhiteApparel = forms.BooleanField()
+    nonWhiteApparel = forms.BooleanField(initial=True, required=False)
     colorsF = forms.IntegerField()
     colorsB = forms.IntegerField()
     colorsR = forms.IntegerField()
