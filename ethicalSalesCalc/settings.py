@@ -26,7 +26,7 @@ SECRET_KEY = '22v1i$m+4nyti1cu8a3^ge#if1*0o=79vp4cgofucgfk%a4s@g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["ethicalsalescalc.herokuapp.com"]
 
 
 # Application definition
