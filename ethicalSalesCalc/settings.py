@@ -26,7 +26,7 @@ SECRET_KEY = '22v1i$m+4nyti1cu8a3^ge#if1*0o=79vp4cgofucgfk%a4s@g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["ethicalsalescalc.herokuapp.com"]
+ALLOWED_HOSTS = ["ethicalsalescalc.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'calc'
 ]
 
 MIDDLEWARE = [
@@ -121,4 +122,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+DEBUG_PROPAGATE_EXCEPTIONS = True

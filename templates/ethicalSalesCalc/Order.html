@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Order</title>
+</head>
+
+<body>
+
+
+  <form id="OrderForm" method="post" action="/order/">
+    {% csrf_token %}
+
+    {{form}}
+    <br>
+    <input type="submit" name="submit" value="submit" />
+  </form>
+
+
+</body>
+
+</html>
