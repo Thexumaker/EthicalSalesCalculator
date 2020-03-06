@@ -11,8 +11,39 @@
   <form id="OrderForm" method="post" action="/order/">
     {% csrf_token %}
 
-    {{form}}
-    <br>
+    <label for="numLocations">Number of Locations (front, back, sleeve, leg)</label>
+	   {{ form.numLocations }}
+     <br>
+     <label for="nonWhiteApparel">Non White Apparel?</label>
+ 	   {{ form.nonWhiteApparel }}
+      <br>
+      <label for="colorsF"> How many colors in front</label>
+  	   {{ form.colorsF }}
+       <br>
+       <label for="colorsB">How many colors in Back</label>
+   	   {{ form.colorsB }}
+        <br>
+        <label for="colorsR">How many colors in Right</label>
+        {{ form.colorsR }}
+         <br>
+         <label for="colorsL">How many colors in Left</label>
+         {{ form.colorsL }}
+          <br>
+         <label for="colorsSP">How many colors in Side pocket???</label>
+          {{ form.colorsSP }}
+          <br>
+          <label for="colorsOS">How many colors in OVER SIZED?</label>
+          {{ form.colorsOS }}
+           <br>
+           <label for="costPerItem">Cost per item?</label>
+           {{ form.costPerItem }}
+            <br>
+            <label for="margin">What is margin?(Put 1.22)</label>
+            {{ form.margin }}
+             <br>
+             <label for="quantity">How many shirts</label>
+             {{ form.quantity }}
+              <br>
     <input type="submit" name="submit" value="submit" />
   </form>
 
