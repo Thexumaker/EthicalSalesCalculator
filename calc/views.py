@@ -57,15 +57,20 @@ def orderForm(request):
             def addC(str):
                 #Bro if u can't understand this lord help u
                 return str + "C"
-            def subtotalPriceCalculator(listofLocations,white,reference):
+            def subtotalPriceCalculator(listofLocations,notwhite,reference):
                 #Returns a dictionary of subtotal prices
                 updatedList = []
                 subtotaldict = {"Front":None, "Back":None,"Left":None, "Right": None}
-                if white:
+                print("DAWDAw")
+                print(listofLocations)
+                if notwhite:
                     for l in listofLocations:
-                        l +=1
-                        l = addC(str(l))
-                        updatedList.append(l)
+                        if l != 0:
+                            l +=1
+                            l = addC(str(l))
+                            updatedList.append(l)
+                        else:
+                            updatedList.append(None)
                 else:
                     for l in listofLocations:
 
@@ -83,29 +88,48 @@ def orderForm(request):
 
             def totalPriceCalculator(subtotal):
                 totalPricePerShirt = 0
+                print(subtotal)
                 for k,v in subtotal.items():
-                    totalPricePerShirt += float(v)
+                    if v == None:
+                        continue
+                    else:
+                        totalPricePerShirt += float(v)
                 return totalPricePerShirt
 
-            def screenCalculator(listofLocations,quantity, oversized):
+            def screenCalculator(listofLocations,quantity, oversized,nonWhiteApparel):
                 #Returns the total cost of screens
-                screenCost =0
-                if quantity > 1000:
-                    screenCost = (oversized +1) * 32
+                if nonWhiteApparel:
+                    screenCost =0
+                    if quantity > 1000:
+                        screenCost = (oversized +1) * 32
+                    else:
+                        for loc in listofLocations:
+                            if loc != 0:
+                                screenCost += (loc +1) *28
+                        screenCost += (oversized +1) * 32
+                    return screenCost
                 else:
-                    for loc in listofLocations:
-                        if loc != 0:
-                            screenCost += (loc +1) *28
-                    screenCost += (oversized +1) * 32
-                return screenCost
+                    screenCost =0
+                    if quantity > 1000:
+                        screenCost = 0
+                    else:
+                        for loc in listofLocations:
+                            if loc != None:
+                                screenCost += loc  *28
+
+                    return screenCost
 
 
 
 
-            def flashCalculator(quantity,locations):
+
+            def flashCalculator(quantity,locations, nonWhiteApparel ):
                 #Returns total cost of flash
                 #Returns a single value
-                return .15 * quantity * locations
+                if nonWhiteApparel:
+                    return .15 * quantity * locations
+                else:
+                    return 0
             def underMinCalc(quan,loc):
                 if quan < 50:
                     return loc * 75
@@ -148,8 +172,8 @@ def orderForm(request):
             subTotal = subtotalPriceCalculator([colorsF,colorsB,colorsR, colorsL], nonWhiteApparel, reference)
             totalPricePerShirt = totalPriceCalculator(subTotal)
             cartTotalCost = totalPricePerShirt * quantity
-            flash = flashCalculator(quantity,numLocations)
-            screenTotal = screenCalculator([colorsF,colorsB,colorsR, colorsL],quantity,colorsOS)
+            flash = flashCalculator(quantity,numLocations,nonWhiteApparel)
+            screenTotal = screenCalculator([colorsF,colorsB,colorsR, colorsL],quantity,colorsOS,nonWhiteApparel)
             underminCharge = underMinCalc(quantity,numLocations)
             ClothesDict = apparelTotalCost([cartTotalCost,flash,screenTotal,underminCharge],numLocations,quantity)
             withTaxandShipping = shippingWithTax("T-Shirts/Long-Sleeves Total", ClothesDict)
@@ -157,13 +181,10 @@ def orderForm(request):
             preCutomerTotal = screenPrintingPlusBlank * margin
             customerPricePerItem = ceil(preCutomerTotal/ quantity,0.25)
             customerSubTotal = customerPricePerItem *quantity
-            print(subTotal)
             print(totalPricePerShirt)
+            print(cartTotalCost)
+            print(flash)
             print(screenTotal)
-            print(ClothesDict)
-            print(withTaxandShipping)
-            print(customerPricePerItem)
-            print(customerSubTotal)
 
             content = {"numLocations": numLocations, "colorsF": colorsF, "colorsB": colorsB, "costPerItem": costPerItem, "quantity": quantity, "customerPricePerItem": customerPricePerItem, "customerSubTotal": customerSubTotal}
             return render(request, 'ethicalSalesCalc/TotalValues.html', content)
