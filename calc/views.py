@@ -68,7 +68,7 @@ def orderForm(request):
                         updatedList.append(l)
                 else:
                     for l in listofLocations:
-                        
+
                         l = addC(str(l))
                         updatedList.append(l)
 
@@ -165,7 +165,7 @@ def orderForm(request):
             print(customerPricePerItem)
             print(customerSubTotal)
 
-            content = {'subTotal': subTotal, 'totalPricePerShirt': totalPricePerShirt, 'clothesDict': ClothesDict, 'tax': withTaxandShipping, 'customerSubTotal': customerSubTotal, 'customerPricePerItem': customerPricePerItem}
+            content = {"numLocations": numLocations, "colorsF": colorsF, "colorsB": colorsB, "costPerItem": costPerItem, "quantity": quantity, "customerPricePerItem": customerPricePerItem, "customerSubTotal": customerSubTotal}
             return render(request, 'ethicalSalesCalc/TotalValues.html', content)
         else:
             print(form.errors)
