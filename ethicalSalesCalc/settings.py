@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '22v1i$m+4nyti1cu8a3^ge#if1*0o=79vp4cgofucgfk%a4s@g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["ethicalsalescalc.herokuapp.com"]
 
@@ -82,13 +82,7 @@ WSGI_APPLICATION = 'ethicalSalesCalc.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+DATABASES = {'default': dj_database_url.config(default='postgres://grffscdjsvsszb:14ce2eab2ceee5be4f04127a345ce6696053f0a1c1ef126b1fe7548f5e0bf266@ec2-3-234-109-123.compute-1.amazonaws.com:5432/dfn50tpg0uva0q')}
 
 
 # Password validation
