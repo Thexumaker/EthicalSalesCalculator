@@ -14,3 +14,4 @@ class Order(models.Model):
     costPerItem = models.IntegerField()
     margin = models.FloatField()
     quantity = models.IntegerField()
+    clothingItem = models.CharField(max_length=120)

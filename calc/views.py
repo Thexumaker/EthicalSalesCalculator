@@ -164,6 +164,7 @@ def orderForm(request):
             colorsSP = int(request.POST.get('colorsSP', ''))
             colorsOS = int(request.POST.get('colorsOS', ''))
             costPerItem = int(request.POST.get('costPerItem', ''))
+            apparelc = request.POST.get('clothingItem', '')
             margin = 1.22
             quantity = int(request.POST.get('quantity', ''))
 
@@ -176,7 +177,7 @@ def orderForm(request):
             screenTotal = screenCalculator([colorsF,colorsB,colorsR, colorsL],quantity,colorsOS,nonWhiteApparel)
             underminCharge = underMinCalc(quantity,numLocations)
             ClothesDict = apparelTotalCost([cartTotalCost,flash,screenTotal,underminCharge],numLocations,quantity)
-            withTaxandShipping = shippingWithTax("T-Shirts/Long-Sleeves Total", ClothesDict)
+            withTaxandShipping = shippingWithTax(apparelc, ClothesDict)
             screenPrintingPlusBlank = (quantity * costPerItem )+ withTaxandShipping.get("Normal")
             preCutomerTotal = screenPrintingPlusBlank * margin
             customerPricePerItem = ceil(preCutomerTotal/ quantity,0.25)
